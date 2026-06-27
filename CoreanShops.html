@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corean Shop · Ramen Coreano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #fcf9f7;
+            color: #1e1e1e;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(6px);
+            padding: 18px 0;
+            border-bottom: 1px solid #f0e6e0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 1.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo i {
+            color: #d44c4c;
+            font-size: 2rem;
+        }
+
+        .logo span {
+            color: #d44c4c;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2d2a2a;
+            font-weight: 500;
+            margin-left: 28px;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d44c4c;
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #fceae5 0%, #fdf6f2 100%);
+            padding: 60px 0 50px;
+            border-radius: 0 0 40px 40px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+        }
+
+        .hero h1 i {
+            color: #d44c4c;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #4f4a4a;
+            max-width: 600px;
+            margin: 16px auto 0;
+        }
+
+        /* Productos */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .section-sub {
+            text-align: center;
+            color: #6b5f5f;
+            margin-bottom: 40px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 28px;
+            padding: 20px 16px 24px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+            border: 1px solid #f0e8e4;
+            text-align: center;
+            transition: 0.25s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Indicador de "en carrito" */
+        .product-card .in-cart-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: #d44c4c;
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .product-card .in-cart-badge.show {
+            display: flex;
+        }
+
+        .product-card .img-wrapper {
+            width: 100%;
+            height: 200px;
+            background: #f4ede9;
+            border-radius: 20px;
+            margin-bottom: 14px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-card .img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .product-card .tag {
+            display: inline-block;
+            background: #f5ece8;
+            padding: 2px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #a06b5e;
+            margin-top: 4px;
+        }
+
+        /* Controles de cantidad */
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .quantity-control button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: #f5ece8;
+            color: #4f3d3a;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .quantity-control button:hover {
+            background: #d44c4c;
+            color: #fff;
+        }
+
+        .quantity-control .qty-number {
+            font-weight: 700;
+            font-size: 1.1rem;
+            min-width: 30px;
+            text-align: center;
+            color: #1e1e1e;
+        }
+
+        /* Carrito de compras */
+        .cart-section {
+            background: #fff;
+            border-radius: 28px;
+            padding: 30px;
+            border: 1px solid #f0e8e4;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #f5ece8;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+
+        .cart-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cart-header h2 i {
+            color: #d44c4c;
+        }
+
+        .cart-items {
+            min-height: 60px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f5ece8;
+            font-size: 0.95rem;
+        }
+
+        .cart-item .item-name {
+            font-weight: 500;
+        }
+
+        .cart-item .item-qty {
+            background: #f5ece8;
+            padding: 0 12px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .empty-cart {
+            color: #b3a59e;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .cart-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.25s;
+            text-decoration: none;
+        }
+
+        .btn-whatsapp:hover {
+            background: #1da851;
+            transform: scale(1.02);
+        }
+
+        .btn-clear {
+            padding: 14px 24px;
+            background: #f5ece8;
+            color: #4f3d3a;
+            border: none;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-clear:hover {
+            background: #e0d3cc;
+        }
+
+        /* Solicitud */
+        .solicitud {
+            background: #fff9f6;
+            padding: 60px 0;
+            border-radius: 40px 40px 0 0;
+            margin-top: 20px;
+        }
+
+        .solicitud-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 48px 44px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.02);
+            border: 1px solid #f0e8e4;
+        }
+
+        .solicitud-info h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .solicitud-info p {
+            color: #5a4f4f;
+            margin-bottom: 20px;
+        }
+
+        .solicitud-info .highlight {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: #fbf7f4;
+            padding: 16px 20px;
+            border-radius: 40px;
+        }
+
+        .solicitud-info .highlight i {
+            color: #d44c4c;
+            font-size: 1.4rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 6px;
+            color: #3d3737;
+        }
+
+        .form-group input,
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid #e4d9d4;
+            border-radius: 30px;
+            font-size: 1rem;
+            background: #fff;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d44c4c;
+            box-shadow: 0 0 0 4px rgba(212, 76, 76, 0.12);
+        }
+
+        .form-group input[type="file"] {
+            padding: 10px 18px;
+            cursor: pointer;
+        }
+
+        .form-group input[type="file"]::file-selector-button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 30px;
+            background: #f5ece8;
+            color: #4f3d3a;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-right: 12px;
+        }
+
+        .form-group input[type="file"]::file-selector-button:hover {
+            background: #d44c4c;
+            color: #fff;
+        }
+
+        .btn-enviar {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            background: #d44c4c;
+            color: #fff;
+            border: none;
+            font-weight: 700;
+            transition: 0.25s;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        .btn-enviar:hover {
+            background: #b33e3e;
+            transform: scale(1.01);
+        }
+
+        /* Footer */
+        footer {
+            background: #2d2a2a;
+            color: #cfc5c0;
+            padding: 30px 0 20px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        footer .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        footer .footer-logo span {
+            color: #d44c4c;
+        }
+
+        footer .footer-logo i {
+            color: #d44c4c;
+            margin-right: 6px;
+        }
+
+        footer p {
+            color: #b3a59e;
+            margin-top: 8px;
+        }
+
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .socials a {
+            background: #3d3737;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cfc5c0;
+            transition: 0.2s;
+        }
+
+        .socials a:hover {
+            background: #d44c4c;
+            color: #fff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .solicitud-wrapper {
+                grid-template-columns: 1fr;
+                padding: 32px 24px;
+            }
+            .header-inner {
+                flex-direction: column;
+                gap: 12px;
+            }
+            nav a {
+                margin: 0 12px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .cart-actions {
+                flex-direction: column;
+            }
+            .btn-whatsapp, .btn-clear {
+                width: 100%;
+                justify-content: center;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="container header-inner">
+            <div class="logo">
+                <i class="fas fa-utensils"></i> Corean<span>Shop</span>
+            </div>
+            <nav>
+                <a href="#productos">Productos</a>
+                <a href="#solicitud">Pedir producto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <h1><i class="fas fa-star"></i> Corean Shop <i class="fas fa-star"></i></h1>
+            <p>Los mejores ramen y snacks coreanos.<br />¡Descubre el sabor de Corea!</p>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS (4 RAMEN CORÉANOS) -->
+    <section id="productos" class="container">
+        <h2 class="section-title">🍜 Ramen Coreano</h2>
+        <p class="section-sub">Los más populares, listos para disfrutar</p>
+        <div class="product-grid" id="productGrid">
+
+            <!-- Producto 1: Buldak Ramen Carbonara -->
+            <div class="product-card" data-product="Buldak Ramen Carbonara">
+                <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
+                <div class="img-wrapper">
+                    <img src="https://megafood.mx/wp-content/uploads/2025/08/Buldak_Carbo_MZ_W-600x600.jpg" alt="Buldak Ramen Carbonara">
+                </div>
+                <h3>Buldak Ramen Carbonara</h3>
+                <span class="tag">🧂 Sabor suave</span>
+                <div class="quantity-control">
+                    <button class="qty-btn" data-action="decrease">−</button>
+                    <span class="qty-number">0</span>
+                    <button class="qty-btn" data-action="increase">+</button>
+                </div>
+            </div>
+
+            <!-- Producto 2: Buldak Ramen Original -->
+            <div class="product-card" data-product="Buldak Ramen Original">
+                <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
+                <div class="img-wrapper">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_782460-MLM110349103417_042026-O.webp" alt="Buldak Ramen Original">
+                </div>
+                <h3>Buldak Ramen Original</h3>
+                <span class="tag">🔥 Picante clásico</span>
+                <div class="quantity-control">
+                    <button class="qty-btn" data-action="decrease">−</button>
+                    <span class="qty-number">0</span>
+                    <button class="qty-btn" data-action="increase">+</button>
+                </div>
+            </div>
+
+            <!-- Producto 3: Buldak Ramen Doble picante -->
+            <div class="product-card" data-product="Buldak Ramen Doble picante">
+                <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
+                <div class="img-wrapper">
+                    <img src="https://http2.mlstatic.com/D_NQ_NP_691901-MLA99338473938_112025-O.webp" alt="Buldak Ramen Doble picante">
+                </div>
+                <h3>Buldak Ramen Doble picante</h3>
+                <span class="tag">🌶️ Extra picante</span>
+                <div class="quantity-control">
+                    <button class="qty-btn" data-action="decrease">−</button>
+                    <span class="qty-number">0</span>
+                    <button class="qty-btn" data-action="increase">+</button>
+                </div>
+            </div>
+
+            <!-- Producto 4: Buldak Ramen Spacy Chiken -->
+            <div class="product-card" data-product="Buldak Ramen Spacy Chiken">
+                <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
+                <div class="img-wrapper">
+                    <img src="https://www.theramenrater.com/wp-content/uploads/2022/08/2022_8_23_4400_001.jpg" alt="Buldak Ramen Spacy Chiken">
+                </div>
+                <h3>Buldak Ramen Spacy Chiken</h3>
+                <span class="tag">🍜 Fideos gruesos</span>
+                <div class="quantity-control">
+                    <button class="qty-btn" data-action="decrease">−</button>
+                    <span class="qty-number">0</span>
+                    <button class="qty-btn" data-action="increase">+</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- SECCIÓN CARRITO DE COMPRAS -->
+        <div class="cart-section" id="cartSection">
+            <div class="cart-header">
+                <h2><i class="fas fa-shopping-cart"></i> Tu pedido</h2>
+                <span id="cartCount" style="background:#d44c4c; color:#fff; padding:4px 14px; border-radius:30px; font-weight:600;">0</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart">🛒 Aún no has agregado productos.</div>
+            </div>
+            <div class="cart-actions">
+                <button class="btn-clear" onclick="clearCart()"><i class="fas fa-trash-alt"></i> Vaciar carrito</button>
+                <button class="btn-whatsapp" onclick="placeOrder()">
+                    <i class="fab fa-whatsapp"></i> Hacer pedido por WhatsApp
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLICITUD DE PRODUCTO (nombre + carga de imagen) -->
+    <section id="solicitud" class="solicitud">
+        <div class="container solicitud-wrapper">
+            <div class="solicitud-info">
+                <h2>🙋 ¿Quieres otro producto?</h2>
+                <p>Déjanos tu sugerencia y la tendremos en cuenta para futuros pedidos.</p>
+                <div class="highlight">
+                    <i class="fas fa-heart"></i>
+                    <span><strong>Más de 50 productos</strong> agregados gracias a tus peticiones.</span>
+                </div>
+            </div>
+            <form id="formSolicitud" onsubmit="enviarSolicitud(event)">
+                <div class="form-group">
+                    <label for="nombreProducto">Nombre del producto *</label>
+                    <input type="text" id="nombreProducto" placeholder="Ej: Ramen de kimchi" required />
+                </div>
+                <div class="form-group">
+                    <label for="imagenProducto">Subir imagen (opcional)</label>
+                    <input type="file" id="imagenProducto" accept="image/*" />
+                    <small style="color:#8a7d77; display:block; margin-top:4px;">Selecciona una imagen desde tu galería.</small>
+                </div>
+                <button type="submit" class="btn-enviar"><i class="fas fa-paper-plane" style="margin-right:10px;"></i>Enviar petición</button>
+                <p style="font-size:0.8rem; color:#8a7d77; margin-top:14px; text-align:center;">
+                    <i class="fas fa-lock"></i> Tus datos están seguros.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo"><i class="fas fa-utensils"></i> Corean<span>Shop</span></div>
+            <p>Tu tienda de productos coreanos de confianza.</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-tiktok"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="margin-top:20px; font-size:0.85rem;">&copy; 2026 CoreanShop · Hecho con <i class="fas fa-heart" style="color:#d44c4c;"></i></p>
+        </div>
+    </footer>
+
+    <script>
+        // Carrito de compras
+        let cart = [];
+
+        // Obtener todos los productos
+        const productCards = document.querySelectorAll('.product-card');
+
+        // Inicializar controles de cantidad
+        productCards.forEach(card => {
+            const productName = card.dataset.product;
+            const qtySpan = card.querySelector('.qty-number');
+            const badge = card.querySelector('.in-cart-badge');
+
+            // Función para actualizar la UI del producto
+            function updateProductUI() {
+                const existing = cart.find(item => item.name === productName);
+                const qty = existing ? existing.quantity : 0;
+                qtySpan.textContent = qty;
+                if (qty > 0) {
+                    badge.classList.add('show');
+                } else {
+                    badge.classList.remove('show');
+                }
+            }
+
+            // Eventos de los botones + y -
+            card.querySelector('.qty-btn[data-action="increase"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                // Buscar o crear item en el carrito
+                let existing = cart.find(item => item.name === productName);
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ name: productName, quantity: 1 });
+                }
+                updateProductUI();
+                updateCartDisplay();
+            });
+
+            card.querySelector('.qty-btn[data-action="decrease"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                let existing = cart.find(item => item.name === productName);
+                if (existing) {
+                    if (existing.quantity > 1) {
+                        existing.quantity -= 1;
+                    } else {
+                        // Eliminar del carrito
+                        cart = cart.filter(item => item.name !== productName);
+                    }
+                } else {
+                    return;
+                }
+                updateProductUI();
+                updateCartDisplay();
+            });
+
+            // Inicializar UI
+            updateProductUI();
+        });
+
+        // Actualizar la vista del carrito (resumen)
+        function updateCartDisplay() {
+            const container = document.getElementById('cartItems');
+            const countSpan = document.getElementById('cartCount');
+            let totalItems = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="empty-cart">🛒 Aún no has agregado productos.</div>`;
+                countSpan.textContent = '0';
+                return;
+            }
+
+            let html = '';
+            cart.forEach(item => {
+                totalItems += item.quantity;
+                html += `
+                    <div class="cart-item">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-qty">${item.quantity} unidad(es)</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            countSpan.textContent = totalItems;
+        }
+
+        // Vaciar carrito
+        function clearCart() {
+            if (cart.length === 0) return;
+            if (confirm('¿Vaciar todo el carrito?')) {
+                cart = [];
+                // Actualizar todas las tarjetas
+                productCards.forEach(card => {
+                    const qtySpan = card.querySelector('.qty-number');
+                    const badge = card.querySelector('.in-cart-badge');
+                    qtySpan.textContent = '0';
+                    badge.classList.remove('show');
+                });
+                updateCartDisplay();
+            }
+        }
+
+        // Realizar pedido por WhatsApp
+        function placeOrder() {
+            if (cart.length === 0) {
+                alert('⚠️ Tu carrito está vacío. Agrega algunos productos primero.');
+                return;
+            }
+
+            let message = 'Hola, me gustaría realizar el siguiente pedido:%0A';
+            let total = 0;
+            cart.forEach(item => {
+                message += `- ${item.quantity}x ${item.name}%0A`;
+                total += item.quantity;
+            });
+            message += `%0ATotal: ${total} producto(s).`;
+
+            const phone = '5219518596098';
+            const url = `https://wa.me/${phone}?text=${message}`;
+            window.open(url, '_blank');
+        }
+
+        // Función para el formulario de solicitud
+        function enviarSolicitud(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombreProducto').value.trim();
+            if (!nombre) {
+                alert('Por favor, escribe el nombre del producto.');
+                return;
+            }
+            const btn = document.querySelector('.btn-enviar');
+            const original = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check-circle"></i> ¡Gracias!';
+                btn.style.background = '#4caf50';
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    document.getElementById('formSolicitud').reset();
+                }, 2500);
+            }, 1500);
+        }
+    </script>
+
+</body>
+</html>
