@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Corean Shop · Ramen Coreano</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
+        /* ==================== RESET & BASE ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -26,7 +27,7 @@
             padding: 0 24px;
         }
 
-        /* Header */
+        /* ==================== HEADER ==================== */
         header {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(6px);
@@ -86,7 +87,7 @@
             width: 100%;
         }
 
-        /* Hero */
+        /* ==================== HERO ==================== */
         .hero {
             background: linear-gradient(135deg, #fceae5 0%, #fdf6f2 100%);
             padding: 60px 0 50px;
@@ -111,7 +112,7 @@
             margin: 16px auto 0;
         }
 
-        /* Productos */
+        /* ==================== PRODUCTOS ==================== */
         .section-title {
             font-size: 2rem;
             font-weight: 700;
@@ -148,7 +149,7 @@
             box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
         }
 
-        /* Indicador de "en carrito" */
+        /* Badge "en carrito" */
         .product-card .in-cart-badge {
             position: absolute;
             top: 12px;
@@ -168,6 +169,7 @@
             display: flex;
         }
 
+        /* Imagen */
         .product-card .img-wrapper {
             width: 100%;
             height: 200px;
@@ -205,7 +207,20 @@
             margin-top: 4px;
         }
 
-        /* Controles de cantidad */
+        /* ===== DISPONIBILIDAD ===== */
+        .availability {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+        .availability.available {
+            color: #2e7d32; /* verde */
+        }
+        .availability.unavailable {
+            color: #c62828; /* rojo */
+        }
+
+        /* ===== CONTROLES DE CANTIDAD ===== */
         .quantity-control {
             display: flex;
             align-items: center;
@@ -243,7 +258,7 @@
             color: #1e1e1e;
         }
 
-        /* Carrito de compras */
+        /* ==================== CARRITO ==================== */
         .cart-section {
             background: #fff;
             border-radius: 28px;
@@ -344,7 +359,7 @@
             background: #e0d3cc;
         }
 
-        /* Solicitud */
+        /* ==================== SOLICITUD ==================== */
         .solicitud {
             background: #fff9f6;
             padding: 60px 0;
@@ -460,7 +475,7 @@
             transform: scale(1.01);
         }
 
-        /* Footer */
+        /* ==================== FOOTER ==================== */
         footer {
             background: #2d2a2a;
             color: #cfc5c0;
@@ -514,7 +529,7 @@
             color: #fff;
         }
 
-        /* Responsive */
+        /* ==================== RESPONSIVE ==================== */
         @media (max-width: 768px) {
             .solicitud-wrapper {
                 grid-template-columns: 1fr;
@@ -533,7 +548,8 @@
             .cart-actions {
                 flex-direction: column;
             }
-            .btn-whatsapp, .btn-clear {
+            .btn-whatsapp,
+            .btn-clear {
                 width: 100%;
                 justify-content: center;
             }
@@ -543,9 +559,10 @@
         }
     </style>
 </head>
+
 <body>
 
-    <!-- HEADER -->
+    <!-- ==================== HEADER ==================== -->
     <header>
         <div class="container header-inner">
             <div class="logo">
@@ -558,7 +575,7 @@
         </div>
     </header>
 
-    <!-- HERO -->
+    <!-- ==================== HERO ==================== -->
     <section class="hero">
         <div class="container">
             <h1><i class="fas fa-star"></i> Corean Shop <i class="fas fa-star"></i></h1>
@@ -566,13 +583,13 @@
         </div>
     </section>
 
-    <!-- PRODUCTOS (4 RAMEN CORÉANOS) -->
+    <!-- ==================== PRODUCTOS ==================== -->
     <section id="productos" class="container">
         <h2 class="section-title">🍜 Ramen Coreano</h2>
         <p class="section-sub">Los más populares, listos para disfrutar</p>
         <div class="product-grid" id="productGrid">
 
-            <!-- Producto 1: Buldak Ramen Carbonara -->
+            <!-- Producto 1 -->
             <div class="product-card" data-product="Buldak Ramen Carbonara">
                 <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
                 <div class="img-wrapper">
@@ -580,6 +597,8 @@
                 </div>
                 <h3>Buldak Ramen Carbonara</h3>
                 <span class="tag">🧂 Sabor suave</span>
+                <!-- DISPONIBILIDAD: cambia el texto o la clase -->
+                <p class="availability available">✅ Disponible</p>
                 <div class="quantity-control">
                     <button class="qty-btn" data-action="decrease">−</button>
                     <span class="qty-number">0</span>
@@ -587,7 +606,7 @@
                 </div>
             </div>
 
-            <!-- Producto 2: Buldak Ramen Original -->
+            <!-- Producto 2 -->
             <div class="product-card" data-product="Buldak Ramen Original">
                 <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
                 <div class="img-wrapper">
@@ -595,6 +614,7 @@
                 </div>
                 <h3>Buldak Ramen Original</h3>
                 <span class="tag">🔥 Picante clásico</span>
+                <p class="availability available">✅ Disponible</p>
                 <div class="quantity-control">
                     <button class="qty-btn" data-action="decrease">−</button>
                     <span class="qty-number">0</span>
@@ -602,7 +622,7 @@
                 </div>
             </div>
 
-            <!-- Producto 3: Buldak Ramen Doble picante -->
+            <!-- Producto 3 -->
             <div class="product-card" data-product="Buldak Ramen Doble picante">
                 <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
                 <div class="img-wrapper">
@@ -610,6 +630,7 @@
                 </div>
                 <h3>Buldak Ramen Doble picante</h3>
                 <span class="tag">🌶️ Extra picante</span>
+                <p class="availability unavailable">❌ No disponible</p>
                 <div class="quantity-control">
                     <button class="qty-btn" data-action="decrease">−</button>
                     <span class="qty-number">0</span>
@@ -617,7 +638,7 @@
                 </div>
             </div>
 
-            <!-- Producto 4: Buldak Ramen Spacy Chiken -->
+            <!-- Producto 4 -->
             <div class="product-card" data-product="Buldak Ramen Spacy Chiken">
                 <span class="in-cart-badge"><i class="fas fa-check-circle"></i> En carrito</span>
                 <div class="img-wrapper">
@@ -625,6 +646,7 @@
                 </div>
                 <h3>Buldak Ramen Spacy Chiken</h3>
                 <span class="tag">🍜 Fideos gruesos</span>
+                <p class="availability available">✅ Disponible</p>
                 <div class="quantity-control">
                     <button class="qty-btn" data-action="decrease">−</button>
                     <span class="qty-number">0</span>
@@ -634,7 +656,7 @@
 
         </div>
 
-        <!-- SECCIÓN CARRITO DE COMPRAS -->
+        <!-- ==================== CARRITO ==================== -->
         <div class="cart-section" id="cartSection">
             <div class="cart-header">
                 <h2><i class="fas fa-shopping-cart"></i> Tu pedido</h2>
@@ -652,7 +674,7 @@
         </div>
     </section>
 
-    <!-- SOLICITUD DE PRODUCTO (nombre + carga de imagen) -->
+    <!-- ==================== SOLICITUD ==================== -->
     <section id="solicitud" class="solicitud">
         <div class="container solicitud-wrapper">
             <div class="solicitud-info">
@@ -681,7 +703,7 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ==================== FOOTER ==================== -->
     <footer>
         <div class="container">
             <div class="footer-logo"><i class="fas fa-utensils"></i> Corean<span>Shop</span></div>
@@ -696,67 +718,28 @@
         </div>
     </footer>
 
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
-        // Carrito de compras
+        // ---------- CARRITO ----------
         let cart = [];
-
-        // Obtener todos los productos
         const productCards = document.querySelectorAll('.product-card');
 
-        // Inicializar controles de cantidad
-        productCards.forEach(card => {
+        // Actualiza la UI de cada tarjeta
+        function updateProductUI(card) {
             const productName = card.dataset.product;
             const qtySpan = card.querySelector('.qty-number');
             const badge = card.querySelector('.in-cart-badge');
-
-            // Función para actualizar la UI del producto
-            function updateProductUI() {
-                const existing = cart.find(item => item.name === productName);
-                const qty = existing ? existing.quantity : 0;
-                qtySpan.textContent = qty;
-                if (qty > 0) {
-                    badge.classList.add('show');
-                } else {
-                    badge.classList.remove('show');
-                }
+            const existing = cart.find(item => item.name === productName);
+            const qty = existing ? existing.quantity : 0;
+            qtySpan.textContent = qty;
+            if (qty > 0) {
+                badge.classList.add('show');
+            } else {
+                badge.classList.remove('show');
             }
+        }
 
-            // Eventos de los botones + y -
-            card.querySelector('.qty-btn[data-action="increase"]').addEventListener('click', function(e) {
-                e.stopPropagation();
-                // Buscar o crear item en el carrito
-                let existing = cart.find(item => item.name === productName);
-                if (existing) {
-                    existing.quantity += 1;
-                } else {
-                    cart.push({ name: productName, quantity: 1 });
-                }
-                updateProductUI();
-                updateCartDisplay();
-            });
-
-            card.querySelector('.qty-btn[data-action="decrease"]').addEventListener('click', function(e) {
-                e.stopPropagation();
-                let existing = cart.find(item => item.name === productName);
-                if (existing) {
-                    if (existing.quantity > 1) {
-                        existing.quantity -= 1;
-                    } else {
-                        // Eliminar del carrito
-                        cart = cart.filter(item => item.name !== productName);
-                    }
-                } else {
-                    return;
-                }
-                updateProductUI();
-                updateCartDisplay();
-            });
-
-            // Inicializar UI
-            updateProductUI();
-        });
-
-        // Actualizar la vista del carrito (resumen)
+        // Actualiza el resumen del carrito
         function updateCartDisplay() {
             const container = document.getElementById('cartItems');
             const countSpan = document.getElementById('cartCount');
@@ -783,12 +766,49 @@
             countSpan.textContent = totalItems;
         }
 
+        // Inicializar eventos en cada tarjeta
+        productCards.forEach(card => {
+            const productName = card.dataset.product;
+
+            // Botón +
+            card.querySelector('.qty-btn[data-action="increase"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                let existing = cart.find(item => item.name === productName);
+                if (existing) {
+                    existing.quantity += 1;
+                } else {
+                    cart.push({ name: productName, quantity: 1 });
+                }
+                updateProductUI(card);
+                updateCartDisplay();
+            });
+
+            // Botón -
+            card.querySelector('.qty-btn[data-action="decrease"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                let existing = cart.find(item => item.name === productName);
+                if (existing) {
+                    if (existing.quantity > 1) {
+                        existing.quantity -= 1;
+                    } else {
+                        cart = cart.filter(item => item.name !== productName);
+                    }
+                } else {
+                    return;
+                }
+                updateProductUI(card);
+                updateCartDisplay();
+            });
+
+            // Estado inicial
+            updateProductUI(card);
+        });
+
         // Vaciar carrito
         function clearCart() {
             if (cart.length === 0) return;
             if (confirm('¿Vaciar todo el carrito?')) {
                 cart = [];
-                // Actualizar todas las tarjetas
                 productCards.forEach(card => {
                     const qtySpan = card.querySelector('.qty-number');
                     const badge = card.querySelector('.in-cart-badge');
@@ -799,7 +819,7 @@
             }
         }
 
-        // Realizar pedido por WhatsApp
+        // Pedido por WhatsApp
         function placeOrder() {
             if (cart.length === 0) {
                 alert('⚠️ Tu carrito está vacío. Agrega algunos productos primero.');
@@ -819,7 +839,7 @@
             window.open(url, '_blank');
         }
 
-        // Función para el formulario de solicitud
+        // ---------- FORMULARIO DE SOLICITUD ----------
         function enviarSolicitud(e) {
             e.preventDefault();
             const nombre = document.getElementById('nombreProducto').value.trim();
